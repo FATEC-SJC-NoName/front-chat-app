@@ -25,9 +25,50 @@
                 </div>
 
             </div>
+
+             <div class="col-6 my-5 ">
+
+                <div class="card" style="height: 100%">
+                    <h2 class="card-header bg-success rounded text-white">Chat E-Condutor</h2>
+                    <div class="card-body ">
+                        <div class="form-group" >
+                            <div class="tile is-parent is-vertical" >
+                                
+                                    <label>Aguarde, logo um atendente irá falar com você.</label>
+                                
+                                    <div class="tile is-child box " style="background-color:#F5F5F5; font-size:14px">
+                                        
+                                        <label class="text-left font-weight-bold "><b-icon icon="user" size='is-large' ></b-icon>Olá, meu nome é Pedro. Em que posso ajuda-lo?</label>
+                                    </div>
+                                    
+                                    <div class="tile is-child box" style="background-color:#00FF7F;font-size:14px">
+                                        
+                                        <label class="text-left font-weight-bold ">Olá, gostaria de agendar aula. </label><b-icon icon="user" size='is-large'></b-icon>
+                                    </div>
+                                
+                            </div>                
+         
+                        </div>
+                        
+                    </div>
+                    <footer class="footer">
+                        <b-field>
+                            <b-input rounded size="is-large"></b-input>
+                            <p class="control">
+                                <b-button class="button is-success" size="is-large" rounded><b-icon icon="paper-plane"></b-icon></b-button>
+                            </p>
+                        </b-field>
+                    </footer>
+                </div>
+                
+            </div>
         </div>
     </div>
 </template>
+<style  scoped>
+
+
+</style>
 <script>
 export default {
   name: 'ChatBox',
