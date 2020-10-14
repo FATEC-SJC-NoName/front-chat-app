@@ -27,13 +27,18 @@
 
             </div>
 
+
              <div class="col-6 my-5 " v-if="ExibirChat">
+
+        
 
                 <div class="card" style="height: 100%">
                     <h2 class="card-header bg-success rounded text-white">Chat E-Condutor</h2>
                     <div class="card-body ">
+
                         <div class="form-group" id='scroll' style="height:350px; overflow-y: auto;">
                             <div class="tile is-parent is-vertical"  >
+
                                 
                                     <label>Aguarde, logo um atendente irá falar com você.</label>
                                 
@@ -41,10 +46,11 @@
                                         
                                         <label class="text-left font-weight-bold "><b-icon icon="user" size='is-large' ></b-icon>Olá, meu nome é Pedro. Em que posso ajuda-lo?</label>
                                     </div>
-                              
-                                    
-                                    <div class="tile is-child box" style="background-color:#00FF7F;font-size:14px" v-for="texto in textosEnviados" :key="texto">
-                                        <label class="text-left font-weight-bold "> {{texto.mensagem}}</label><b-icon icon="user" size='is-large'></b-icon>
+                         
+                                    <div class="tile is-child box" style="background-color:#00FF7F;font-size:14px">
+                                        
+                                        <label class="text-left font-weight-bold ">Olá, gostaria de agendar aula. </label><b-icon icon="user" size='is-large'></b-icon>
+
                                     </div>
                                 
                             </div>                
@@ -54,6 +60,7 @@
                     </div>
                     <footer class="footer">
                         <b-field>
+
                             <b-input rounded size="is-large" v-model="texto.mensagem" @keyup.native.enter='EnviandoMensagem(texto.mensagem)' ></b-input>
                             <p class="control">
                                 <b-button class="button is-success" size="is-large" @click="EnviandoMensagem(texto.mensagem)" rounded><b-icon icon="paper-plane"></b-icon></b-button>
