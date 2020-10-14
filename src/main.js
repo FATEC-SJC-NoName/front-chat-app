@@ -19,7 +19,7 @@ Vue.component('vue-fontawesome', FontAwesomeIcon);
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 Vue.use(Buefy, {
-  defaultIconComponent: 'vue-fontawesome',
+//  defaultIconComponent: 'vue-fontawesome',
   defaultIconPack: 'fas',
 });
 
