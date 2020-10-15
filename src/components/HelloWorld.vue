@@ -15,10 +15,11 @@ export default {
   },
   methods: {
     async fetchAllChats() {
-      console.log("hello")
+      console.log("paulo")
       const repo = new ChatRepository();
 
-      const model = await repo.fetchAllChats();
+      // const model = repo.fetchAll();
+      const model = await repo.createChat({"name": "chat-1", "isActive": true});
 
       console.log(model)
     }

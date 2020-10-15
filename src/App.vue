@@ -25,7 +25,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import HelloWorld from "./components/HelloWorld.vue"
-import { ChatRepository } from "./repositories"
 
 @Component({
   name: 'App',
@@ -34,7 +33,6 @@ import { ChatRepository } from "./repositories"
   },
   data() {
     return {
-      chatRepository: new ChatRepository(),
       bgColor: '#009900',
       position: 'bottom-left',
       fabActions: [

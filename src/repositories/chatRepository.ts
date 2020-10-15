@@ -1,3 +1,4 @@
+import ChatModel from '@/entities/chatModel';
 import { ChatService } from "../services";
 
 type ChatErrorResponse = {
@@ -6,20 +7,32 @@ type ChatErrorResponse = {
 };
 
 interface ChatRepositoryInterface {
-  fetchAllChats(): Promise<any> | Promise<ChatErrorResponse>
+  fetchAll(): Promise<[ChatModel] | ChatErrorResponse>
+  createChat(request: any): Promise<ChatModel | ChatErrorResponse>
 }
 
 export default class ChatRepository implements ChatRepositoryInterface {
-  private chartService: ChatService;
+  private readonly chartService: ChatService;
   
   constructor() {
-    this.chartService = new ChatService("http://localhost:8080");
+    this.chartService = new ChatService();
+  }
+  async createChat(request: any): Promise<ChatModel | ChatErrorResponse> {
+    const response = await this.chartService.createChat(request);
+
+    if (response.data.error) {
+      const error: ChatErrorResponse = response.data.error;
+      
+      return error;
+    }
+
+    const model: ChatModel = response.data;
+
+    return model;
   }
 
-async fetchAllChats(): Promise<any | ChatErrorResponse> {
+  async fetchAll(): Promise<[ChatModel] | ChatErrorResponse> {
     const response = await this.chartService.fetchAllChats();
-
-    console.log(response)
 
     if (response.data.error) {
       const error: ChatErrorResponse = JSON.parse(response.data.error);
