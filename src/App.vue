@@ -2,79 +2,60 @@
   <div id="app">
     <div class="columns">
 
-      <div class="column" v-if="ExibirChat">
-        <ChatBox></ChatBox>
-      </div>
-      <div class="column" v-if="ExibirDashboard">
-        <Dashboard></Dashboard>
-      </div>
-
-
-
       <div class="column">
-        <img alt="Vue logo" src="./assets/logo.png">
-        <HelloWorld  msg="Chat NoName"/>    
+        <img alt="Vue logo" src="./assets/logo.png" />
+        <HelloWorld msg="Chat NoName" />
       </div>
-  
-      <fab :position="position" position-type="absolute" :bg-color="bgColor" :actions="fabActions" main-icon="account_circle" 
-      @dashboard="dashboard" @chatBox="chatBox" start-opened="false" toggle-when-away="true"></fab>
 
+      <fab
+        :position="position"
+        position-type="absolute"
+        :bg-color="bgColor"
+        :actions="fabActions"
+        main-icon="account_circle"
+        @dashboard="dashboard"
+        @chatBox="chatBox"
+        start-opened="false"
+        toggle-when-away="true"
+      ></fab>
     </div>
-    
-
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-import fab from 'vue-fab'
-import ChatBox from './components/ChatBox.vue'
-import Dashboard from './components/Dashboard.vue'
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import HelloWorld from "./components/HelloWorld.vue"
+import { ChatRepository } from "./repositories"
 
-
-export default {
+@Component({
   name: 'App',
   components: {
-    HelloWorld,fab,ChatBox,Dashboard
+    HelloWorld,
   },
-   data(){
-      return {
-          ExibirChat:false,
-          ExibirDashboard:false,          
-          bgColor: '#009900',
-          position: 'bottom-left',
-        
-          
-          fabActions: [
-              {
-                  icon:'dashboard',
-                  name:'dashboard'
-              },
-             {             
-                icon: 'chat',
-                name: 'chatBox',                
-              }
-          ]
-      }
+  data() {
+    return {
+      chatRepository: new ChatRepository(),
+      bgColor: '#009900',
+      position: 'bottom-left',
+      fabActions: [
+        {
+          icon: 'dashboard',
+          name: 'dashboard',
+        },
+        {
+          icon: 'chat',
+          name: 'chatBox',
+        },
+      ],
+    }
   },
-  created(){
-      this.Exibir=false
-
+  methods: {
   },
-  methods:{
-      dashboard(){
-         // alert('dashboard clicado');
-          this.ExibirDashboard=!this.ExibirDashboard
-      },
-      chatBox(){
-         // alert('chat clicado');
-          this.ExibirChat=!this.ExibirChat
-      }
-  }
-}
+})
+export default class App extends Vue {}
 </script>
 
-<style>
+<style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

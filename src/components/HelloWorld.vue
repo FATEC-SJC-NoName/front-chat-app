@@ -1,15 +1,27 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    
+    <button @click="fetchAllChats">click</button>
   </div>
 </template>
 
 <script>
+import { ChatRepository } from "../repositories"
+
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: String,
+  },
+  methods: {
+    async fetchAllChats() {
+      console.log("hello")
+      const repo = new ChatRepository();
+
+      const model = await repo.fetchAllChats();
+
+      console.log(model)
+    }
   }
 }
 </script>
