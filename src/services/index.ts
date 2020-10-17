@@ -1,4 +1,4 @@
-import ChatService from './chatService'
-import Client from './client'
+import ChatService from "./chatService";
+import Client from "./client";
 
-export { Client, ChatService }
+export { Client, ChatService };

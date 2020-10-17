@@ -1,3 +1,3 @@
-import ChatRepository from "./chatRepository"
+import ChatRepository from "./chatRepository";
 
-export { ChatRepository }
+export { ChatRepository };

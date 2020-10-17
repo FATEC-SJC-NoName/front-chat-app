@@ -111,13 +111,13 @@
 <style scoped></style>
 <script>
 export default {
-  name: 'ChatBox',
+  name: "ChatBox",
   data() {
     return {
       ExibirChat: false,
       textosEnviados: [],
-      texto: { mensagem: '' },
-    }
+      texto: { mensagem: "" }
+    };
   },
   methods: {
     clicou() {
@@ -133,7 +133,7 @@ export default {
     scrollToEnd() {
       // let container = document.getElementById('scroll')
       // container.scrollTop = container.scrollHeight
-    },
-  },
-}
+    }
+  }
+};
 </script>
