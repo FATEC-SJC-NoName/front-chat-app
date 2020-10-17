@@ -8,14 +8,11 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "prettier": "prettier --write .",
     "sonar": "gulp sonar"
   },
   "dependencies": {
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
-    "jquery": "^3.5.1",
-    "jquery.js": "0.0.2-security",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
