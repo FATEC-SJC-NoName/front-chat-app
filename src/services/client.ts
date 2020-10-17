@@ -1,11 +1,11 @@
-import Axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import Axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
 export default class Client {
   baseURL: string;
   instance: AxiosInstance;
   headers: any = {
-    'Accept-language': 'pt-br',
-    'Content-Type': 'application/json',
+    "Accept-language": "pt-br",
+    "Content-Type": "application/json"
   };
 
   constructor(baseURL: string, options?: AxiosRequestConfig, headers?: any) {
@@ -18,7 +18,7 @@ export default class Client {
     this.instance = Axios.create({
       baseURL: this.baseURL,
       headers: this.headers,
-      ...options,
+      ...options
     });
   }
 }

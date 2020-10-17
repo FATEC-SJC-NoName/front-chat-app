@@ -1,65 +1,57 @@
 <template>
-  <div id="app">
-    <div class="columns">
+  <v-app>
+    <v-app-bar app color="primary" dark>
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
 
-      <div class="column">
-        <img alt="Vue logo" src="./assets/logo.png" />
-        <HelloWorld msg="Chat NoName" />
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
       </div>
 
-      <fab
-        :position="position"
-        position-type="absolute"
-        :bg-color="bgColor"
-        :actions="fabActions"
-        main-icon="account_circle"
-        @dashboard="dashboard"
-        @chatBox="chatBox"
-        start-opened="false"
-        toggle-when-away="true"
-      ></fab>
-    </div>
-  </div>
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <Chat />
+    </v-main>
+  </v-app>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/HelloWorld.vue"
+import Vue from "vue";
+import { Chat } from "@/modules";
 
-@Component({
-  name: 'App',
+export default Vue.extend({
+  name: "App",
+
   components: {
-    HelloWorld,
+    Chat
   },
-  data() {
-    return {
-      bgColor: '#009900',
-      position: 'bottom-left',
-      fabActions: [
-        {
-          icon: 'dashboard',
-          name: 'dashboard',
-        },
-        {
-          icon: 'chat',
-          name: 'chatBox',
-        },
-      ],
-    }
-  },
-  methods: {
-  },
-})
-export default class App extends Vue {}
-</script>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data: () => ({
+    fab: false
+  })
+});
+</script>
