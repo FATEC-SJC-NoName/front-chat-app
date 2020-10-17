@@ -1,4 +1,5 @@
 # chat-app
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=FATEC-SJC-NoName_front-chat-app&metric=alert_status)](https://sonarcloud.io/dashboard?id=FATEC-SJC-NoName_front-chat-app)
 
 ## Project setup
 ```
