@@ -1,14 +1,12 @@
 <template>
-  <v-card
-    width="400px"
-  >
+  <v-card width="400px">
     <v-card-title>
-      {{title}}
+      {{ title }}
     </v-card-title>
     <v-card-text>
-      {{message}}
+      {{ message }}
     </v-card-text>
-  </v-card>  
+  </v-card>
 </template>
 
 <script>
@@ -16,17 +14,12 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   name: "Message",
-  data () {
-    return {
-      title: "User",
-      message: "message form user"
-    }
-  },
+  props: {
+    title: String,
+    message: String
+  }
 })
-
-export default class Message extends Vue{}
+export default class Message extends Vue {}
 </script>
 
-<style>
-
-</style>
+<style></style>

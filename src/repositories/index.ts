@@ -1,3 +1,3 @@
 import ChatRepository from "./chatRepository";
-
-export { ChatRepository };
+import MessageRepository from "./messageRepository";
+export { ChatRepository, MessageRepository };

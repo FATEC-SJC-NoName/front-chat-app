@@ -34,30 +34,24 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld />
       <Chat />
-      
-   
     </v-main>
-   
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
-import Chat from "./modules/chat/Chat.vue";
+import { Chat } from "@/modules";
 
 export default Vue.extend({
   name: "App",
 
   components: {
-    HelloWorld,
     Chat
   },
 
   data: () => ({
-    fab: false,
+    fab: false
   })
 });
 </script>

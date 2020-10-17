@@ -1,4 +1,4 @@
-import ChatModel from "@/entities/chatModel";
+import ChatModel from "@/models/chatModel";
 import { ChatService } from "../services";
 
 type ChatErrorResponse = {
