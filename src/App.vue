@@ -32,16 +32,6 @@ components: {
 
   //Calendar
   },
-
-  data: () => ({
-    fab: false,
-    alunos:[{nome:'Fernando'},{nome:'Antoni'},{nome:'Celso'},{nome:'Paulo'},{nome:'Cauã'},{nome:'Gabriel'},{nome:'Guilherme'}],
-    instrutores:[{nome:'Sakaue'},{nome:'Claudio'},{nome:'Walmir'},{nome:'Agliberto'},{nome:'Araki'}],
-    diretores:[{nome:'Jair'},{nome:'Messias'}],
-    atendentes:[{nome:'Bruna Ferraz'},{nome:'Julia Paes'},{nome:'Monica Mattos'},{nome:'Tiffany'},{nome:'Natasha'},{nome:'Vivi Brunery'},{nome:'Paula Tejano'}],
-  }),
-
-
 });
 </script>
 

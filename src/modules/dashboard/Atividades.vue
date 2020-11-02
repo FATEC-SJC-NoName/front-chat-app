@@ -94,7 +94,7 @@ data() {
       descricao:'',
       tarefa:{},
       requires: [
-        x =>  x && x.length >= 0 || 'Campo obrigatório.'
+        x =>  x && x.length > 0 || 'Campo obrigatório.'
 
       ]
 
