@@ -20,7 +20,6 @@
 <script lang="ts">
 import Vue from "vue";
 import Chat from "./modules/chat/Chat.vue";
-import Atividades from "./modules/dashboard/Atividades.vue"
 import Navegacao from "@/components/Navegacao.vue"
 export default Vue.extend({
   name: "App",
@@ -29,8 +28,7 @@ components: {
 
     Navegacao,
     Chat
-
-  //Calendar
+    
   },
 });
 </script>

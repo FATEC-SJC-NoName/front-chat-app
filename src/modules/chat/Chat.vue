@@ -200,7 +200,7 @@ data() {
       
   }
   atendente(){
-      this.exibir=!this.exibir,
+      this.exibir=!this.exibir
       this.exibirChat=false
 
   }
