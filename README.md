@@ -42,5 +42,5 @@ docker build -t noname/chat-app-front .
 
 ### Run docker app
 ```
-docker run -it -p 8080:80 --rm --name chat-app-front noname/chat-app-front
+docker run -it -p 5000:5000 --rm --name chat-app-front noname/chat-app-front
 ```
