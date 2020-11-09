@@ -12,13 +12,13 @@ interface ChatRepositoryInterface {
 }
 
 export default class ChatRepository implements ChatRepositoryInterface {
-  private readonly chartService: ChatService;
+  private readonly chatService: ChatService;
 
   constructor() {
-    this.chartService = new ChatService();
+    this.chatService = new ChatService();
   }
   async createChat(request: any): Promise<ChatModel | ChatErrorResponse> {
-    const response = await this.chartService.createChat(request);
+    const response = await this.chatService.createChat(request);
 
     if (response.data.error) {
       const error: ChatErrorResponse = response.data.error;
@@ -32,7 +32,7 @@ export default class ChatRepository implements ChatRepositoryInterface {
   }
 
   async fetchAll(): Promise<[ChatModel] | ChatErrorResponse> {
-    const response = await this.chartService.fetchAllChats();
+    const response = await this.chatService.fetchAllChats();
 
     if (response.data.error) {
       const error: ChatErrorResponse = JSON.parse(response.data.error);
