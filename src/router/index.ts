@@ -7,6 +7,7 @@ import Aluno from "@/modules/dashboard/Aluno.vue"
 import Diretor from "@/modules/dashboard/Diretor.vue"
 import Instrutor from "@/modules/dashboard/Instrutor.vue"
 import Atendente from "@/modules/dashboard/Atendente.vue"
+import Login from "@/modules/login/Login.vue"
 
 Vue.use(Router);
 
@@ -16,6 +17,11 @@ export default new Router({
       path: "/",
       name: "Home",
       component: Home 
+     },
+     {   
+      path: "/login",
+      name: "Login",
+      component: Login 
      },
     {
       path: "/atividades",
