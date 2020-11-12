@@ -31,7 +31,6 @@
 
 
 <script>
-import { LoginRepository } from '@/repositories'
 export default {
   data: () => ({
     form: {
