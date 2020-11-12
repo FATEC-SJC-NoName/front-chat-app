@@ -170,7 +170,6 @@
 <script>
 import { Component, Vue } from "vue-property-decorator";
 import { Message } from "@/components";
-import { MessageRepository } from "@/repositories";
 
 @Component({
   components: {
@@ -219,9 +218,7 @@ sheet = false;
 
   async fetchMessages() {
     this.sheet = !this.sheet;
-    const repository = new MessageRepository();
-    this.messages = await repository.fetchAll();
-    console.log(this.messages);
+  
   }
 }
 </script>
