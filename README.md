@@ -33,3 +33,14 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### Build docker app
+```
+docker build -t noname/chat-app-front .
+```
+
+### Run docker app
+```
+docker run -it -p 5000:5000 --rm --name chat-app-front noname/chat-app-front
+```
