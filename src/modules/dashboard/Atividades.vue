@@ -79,19 +79,29 @@
 </template>
 
 <script>
+
+
+
+import { ActivitieRepository } from '@/repositories'
+
 export default {
 name:'Atividades',
+
+
+
+
 data() {
     return {
+
       exibir:false,
       tarefas:[],
       dialog:'',
       date: new Date().toISOString().substr(0, 10),
       dateFormatted: this.formatDate(new Date().toISOString().substr(0, 10)),
+      atividade:'',
+      descricao:'',  
       menu1: false,
       menu2: false,
-      atividade:'',
-      descricao:'',
       tarefa:{},
       requires: [
         x =>  x && x.length > 0 || 'Campo obrigatório.'
@@ -105,16 +115,27 @@ data() {
       },
     },
 methods: {
+  
     add(){      
       this.exibir=!this.exibir      
     },
     addAtividade(){
+      
       this.tarefa.prazo=this.dateFormatted
       this.tarefa.atividade=this.atividade
       this.tarefa.descricao=this.descricao
               
       if(this.$refs.form.validate()){
 
+              const activitieRepository = new ActivitieRepository(); 
+              const body = {
+                     prazo: this.tarefa.prazo,
+                     atividade: this.tarefa.atividade,
+                     descricao: this.tarefa.descricao
+              }         
+              activitieRepository.createActivitie(body).then(resposta => {
+                alert('salvo com sucesso')
+              })
               this.tarefas.push({"Prazo":this.tarefa.prazo,"Atividade":this.atividade,"Descrição":this.descricao})
             
               this.dialog=!this.dialog
@@ -129,5 +150,7 @@ methods: {
       return `${day}/${month}/${year}`
     },
 },
+
+  
 }
 </script>
