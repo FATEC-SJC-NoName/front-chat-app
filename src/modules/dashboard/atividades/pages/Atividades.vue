@@ -128,6 +128,7 @@ export default {
   },
   watch: {
     date(val) {
+      console.log(val)
       this.dateFormatted = this.formatDate(this.date);
     },
   },

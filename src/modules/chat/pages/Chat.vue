@@ -276,15 +276,8 @@
 </template>
 
 <script>
-import { Component, Vue } from "vue-property-decorator";
-import { Message } from "@/components";
 
-@Component({
-  components: {
-    Message,
-  },
-})
-export default class Chat extends Vue {
+export default {
   data() {
     return {
       exibirChat: false,
@@ -292,37 +285,38 @@ export default class Chat extends Vue {
       texto: { mensagem: "" },
       exibir: false,
       robot: false,
-    };
-  }
-  MostraChat() {
+      sheet: false,
+      messages: [],
+    }
+  },
+  methods: {
+    MostraChat() {
     this.exibirChat = !this.exibirChat;
-  }
+  },
   EnviandoMensagem(texto) {
     if (texto) {
       this.textosEnviados.push({ mensagem: texto });
       // this.scrollToEnd()
       this.texto.mensagem = "";
     }
-  }
+  },
   atendente() {
     this.exibir = !this.exibir;
     this.exibirChat = false;
-  }
+  },
   bot() {
     this.robot = true;
-  }
+  },
   scrollToEnd() {
     const container = document.getElementById("scroll");
     container.scrollTop = container.scrollHeight;
-  }
-
-  sheet = false;
-  messages = [];
+  },
 
   async fetchMessages() {
     this.sheet = !this.sheet;
-  }
-}
+  },
+  },
+};
 </script>
 
 <style></style>
