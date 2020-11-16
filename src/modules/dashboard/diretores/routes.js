@@ -1,7 +1,7 @@
 export default [
   {
     path: "/contatos/diretores",
-    name: "Diretores",
+    name: "diretores",
     component: () => import(/* webpackChunkName: "Diretores" */ './pages/Diretores')
   },
 ]

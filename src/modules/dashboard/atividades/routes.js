@@ -1,7 +1,7 @@
 export default [
   {
     path: "/atividades",
-    name: "Atividades",
+    name: "atividades",
     component: () => import(/* webpackChunkName: "Atividades" */ './pages/Atividades')
   },
 ]
