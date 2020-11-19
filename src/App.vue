@@ -4,6 +4,7 @@
 
     <v-content>
       <router-view />
+      <!-- <Chat /> -->
       <Chat />
     </v-content>
   </v-app>
@@ -16,15 +17,14 @@
 }
 </style>
 
-<script>
+<script lang="js">
 import Vue from "vue";
-import Chat from "@/views/Chat.vue";
+// import Chat from "./modules/chat/pages/Chat.vue";
 import Navegacao from "@/components/Navegacao.vue";
 export default Vue.extend({
   name: "App",
   components: {
-    Navegacao,
-    Chat    
+    Navegacao 
   },
-})
+});
 </script>
