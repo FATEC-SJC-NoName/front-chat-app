@@ -31,53 +31,37 @@
 
 
 <script>
-/*import { login, me, createActivity } from "@/services/services"; */
 
-import { mapActions } from 'vuex'
-
+import { mapActions } from "vuex";
 
 export default {
-  data: () => ({
-    form: {
-      username: "",
-      password: "",
-    },
-  }),
+  name: "Login",
+
+  components: {},
+
+  data() {
+    return {
+      form: {
+        username: "",
+        password: "",
+      },
+      showError: false,
+    };
+  },
 
   methods: {
-    ...mapActions('auth', ['ActionDoLogin']),  
-    async submit() {      
+    ...mapActions(["LogIn"]),
+    async submit() {
       try {
-        await this.ActionDoLogin(this.form)
-
-        this.$router.push({
-          name: 'home'
-        })
+          await this.LogIn(this.form);        
+          this.$router.push({name: "Home"})
+          this.showError = false
       } catch (err) {
-        
-        alert(err.data ? err.data.message : 'Não foi possível fazer login' )
+         
+          this.showError = true
       }
-     
     },
   },
-  /* methods: {
-    async login() {
-      const loginResponse = await login({
-        username: "test@test.com",
-        password: "1234"
-      });
-      const meResponse = await me({ jwt: loginResponse.jwt });
-      await createActivity({
-        title: "Nova atividade",
-        userId: meResponse.id,
-        description: "mais uma",
-        isActive: true,
-        jwt: loginResponse.jwt
-      });
-      const meResponse2 = await me({ jwt: loginResponse.jwt });
-      console.log(meResponse2);
-    }
-  } */
 };
 </script>
 

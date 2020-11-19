@@ -22,34 +22,41 @@
           <v-card-title class="headline grey lighten-2">
             Nova Atividade
           </v-card-title>
-
+    <!-- atividade vai conter:
+    title - texto - possui
+    description - texto - possui
+    user - tem que pegar do state
+    isActive - tem que enviar true
+    
+    -->
           <v-card-text>
-            <v-form ref="form">
-              <!-- campo de texto da atividade -->
+            <v-form>
+              <!-- campo de texto da title atividade -->
               <v-text-field
                 label="Atividade"
-                v-model="atividade"
+                v-model="form.title"
                 hide-details="auto"
                 prepend-icon="mdi-folder-upload-outline"
                 :rules="requires"
               ></v-text-field>
 
-              <!-- campo de data -->
+              <!-- campo de data 
               <v-menu
                 ref="menu1"
-                v-model="menu1"
+                v-model="form."
                 :close-on-content-click="false"
                 transition="scale-transition"
                 offset-y
                 max-width="290px"
                 min-width="290px"
               >
+              
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
                     :rules="requires"
-                    v-model="dateFormatted"
+                    v-model="form.dateFormatted"
                     label="Prazo"
-                    persistent-hint
+                    persistent-hi                     nt
                     v-bind="attrs"
                     @blur="date = parseDate(dateFormatted)"
                     v-on="on"
@@ -57,19 +64,23 @@
                   ></v-text-field>
                 </template>
                 <v-date-picker
-                  v-model="date"
+                  v-model="form.date"
                   locale="pt-br"
                   @input="menu1 = false"
                 ></v-date-picker>
               </v-menu>
+              -->
 
               <!-- campo de texto da descrição -->
               <v-textarea
                 label="Descrição"
-                v-model="descricao"
+                v-model="form.description"
                 hide-details="auto"
                 prepend-icon="mdi-information-outline"
               ></v-textarea>
+
+              
+
             </v-form>
           </v-card-text>
 
@@ -81,25 +92,29 @@
             <v-btn color="white" text @click="dialog = false" rounded>
               <v-icon color="red" x-large>mdi-cancel</v-icon>
             </v-btn>
-            <v-btn color="white" text @click="addAtividade" rounded>
+            <v-btn  @click="addAtividade" color="white" rounded>
+     
               <v-icon color="green" x-large>mdi-check</v-icon>
             </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <div>
-        <!-- janelas das atividades -->
+      <div v-if="Atividades">
+        <!-- listar as atividades -->
         <v-row>
-          <v-col v-for="atividade in tarefas" :key="atividade">
+          <v-col v-for="atividade in Atividades.activities" :key="atividade.id">
             <v-card height="320px" width="300px" elevation="4" class="ma-3">
               <v-card-title class="justify-center rounded-t-md green darken-2">
-                <h2 style="color:white;">{{ atividade.Atividade }}</h2>
+                <h2 style="color: white">{{ atividade.title }}</h2>
+                <!-- titulo -->
               </v-card-title>
 
               <v-divider></v-divider>
               <br />
-              <h2 class="text-center">Validade: {{ atividade.Prazo }}</h2>
-              <p class="py-3 px-8">{{ atividade.Descrição }}</p>
+              <h2 class="text-center">Validade: {{ atividade.isActive }}</h2>
+              <!-- prazo -->
+              <p class="py-3 px-8">{{ atividade.description }}</p>
+              <!-- descricao -->
             </v-card>
           </v-col>
         </v-row>
@@ -109,6 +124,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "Atividades",
   data() {
@@ -124,41 +141,32 @@ export default {
       menu2: false,
       tarefa: {},
       requires: [(x) => (x && x.length > 0) || "Campo obrigatório."],
+
+      form:{
+        //passar aqui o que está no formulario - referencia é o login
+        title: "",
+        description: "",
+        user: "dcfbef94-c256-4749-a88e-04957d28048e",
+        isActive: true
+
+      }
     };
   },
   watch: {
     date(val) {
-      console.log(val)
+      console.log(val);
       this.dateFormatted = this.formatDate(this.date);
     },
   },
+
+  computed: {
+    ...mapGetters({Atividades: "StateUserInfo" }),
+  },
+
   methods: {
+   
     add() {
       this.exibir = !this.exibir;
-    },
-    addAtividade() {
-      this.tarefa.prazo = this.dateFormatted;
-      this.tarefa.atividade = this.atividade;
-      this.tarefa.descricao = this.descricao;
-
-      if (this.$refs.form.validate()) {
-        // const activitieRepository = new ActivitieRepository();
-        // const body = {
-        //   prazo: this.tarefa.prazo,
-        //   atividade: this.tarefa.atividade,
-        //   descricao: this.tarefa.descricao,
-        // };
-        // activitieRepository.createActivitie(body).then((resposta) => {
-        //   alert("salvo com sucesso");
-        // });
-        this.tarefas.push({
-          Prazo: this.tarefa.prazo,
-          Atividade: this.atividade,
-          Descrição: this.descricao,
-        });
-
-        this.dialog = !this.dialog;
-      }
     },
 
     formatDate(date) {
@@ -166,6 +174,23 @@ export default {
       const [year, month, day] = date.split("-");
       return `${day}/${month}/${year}`;
     },
+
+     ...mapActions(["CreateActivitie"]),
+
+    
+    async addAtividade() {
+
+    //  if (this.$refs.form.validate()) {
+
+        try{
+          await this.CreateActivitie(this.form)
+        }catch(error){
+          throw "Não foi possivel adicionar atividade"
+        }
+          this.dialog = !this.dialog;
+        }
+//    },
+    
   },
 };
 </script>

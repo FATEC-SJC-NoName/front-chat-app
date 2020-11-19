@@ -1,1 +1,0 @@
-export const hasJwt = ({jwt}) => !!jwt 

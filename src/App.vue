@@ -16,17 +16,14 @@
 }
 </style>
 
-<script lang="js">
+<script>
 import Vue from "vue";
 // import Chat from "./modules/chat/pages/Chat.vue";
 import Navegacao from "@/components/Navegacao.vue";
 export default Vue.extend({
   name: "App",
-
   components: {
-    Navegacao
-    
+    Navegacao    
   },
-});
-
+})
 </script>
