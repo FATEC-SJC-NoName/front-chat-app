@@ -10,6 +10,7 @@ import Home from '../views/Home.vue'
 import Instrutores from '../views/Instrutores.vue'
 import Login from '../views/Login.vue'
 import Testes from '../views/Testes.vue'
+import Chat from '../views/Chat.vue'
 
 Vue.use(VueRouter)
 
@@ -39,7 +40,13 @@ const routes = [
     beforeEnter: ifAuthenticated
    
   },
-
+  {
+    path: '/chat',
+    name: 'Chat',
+    component: Chat,
+    beforeEnter: ifAuthenticated
+   
+  },
   {
     path: '/login',
     name: 'Login',
