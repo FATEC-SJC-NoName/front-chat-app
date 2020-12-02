@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <Navegacao />
+    <br />
+    <br />
+    <br />
     <h2 class="my-5 font-weight-bold">Atividades</h2>
     <div class="text-left">
       <v-dialog v-model="dialog" width="500">
@@ -22,7 +26,7 @@
           <v-card-title class="headline grey lighten-2">
             Nova Atividade
           </v-card-title>
-    <!-- atividade vai conter:
+          <!-- atividade vai conter:
     title - texto - possui
     description - texto - possui
     user - tem que pegar do state
@@ -40,36 +44,37 @@
                 :rules="requires"
               ></v-text-field>
 
-              <!-- campo de data 
+              <!-- campo de data  -->
               <v-menu
                 ref="menu1"
-                v-model="form."
+                v-model="menu1"
                 :close-on-content-click="false"
                 transition="scale-transition"
                 offset-y
                 max-width="290px"
                 min-width="290px"
               >
-              
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
+                    v-model="dateFormatted"
                     :rules="requires"
-                    v-model="form.dateFormatted"
-                    label="Prazo"
-                    persistent-hi                     nt
+                    label="Date"
+                    hint="MM/DD/YYYY format"
+                    persistent-hint                     
                     v-bind="attrs"
                     @blur="date = parseDate(dateFormatted)"
                     v-on="on"
-                    prepend-icon="mdi-calendar-blank-multiple"
+                    prepend-icon="mdi-calendar"
                   ></v-text-field>
                 </template>
                 <v-date-picker
-                  v-model="form.date"
+                  v-model="date"
                   locale="pt-br"
                   @input="menu1 = false"
                 ></v-date-picker>
               </v-menu>
-              -->
+
+              <!-- final campo data -->
 
               <!-- campo de texto da descrição -->
               <v-textarea
@@ -78,9 +83,6 @@
                 hide-details="auto"
                 prepend-icon="mdi-information-outline"
               ></v-textarea>
-
-              
-
             </v-form>
           </v-card-text>
 
@@ -92,8 +94,7 @@
             <v-btn color="white" text @click="dialog = false" rounded>
               <v-icon color="red" x-large>mdi-cancel</v-icon>
             </v-btn>
-            <v-btn  @click="addAtividade" color="white" rounded>
-     
+            <v-btn @click="addAtividade" color="white" rounded>
               <v-icon color="green" x-large>mdi-check</v-icon>
             </v-btn>
           </v-card-actions>
@@ -111,7 +112,8 @@
 
               <v-divider></v-divider>
               <br />
-              <h2 class="text-center">Validade: {{ atividade.isActive }}</h2>
+              <h2 class="text-center">Data: {{ datarender(atividade.date) }}</h2>
+       
               <!-- prazo -->
               <p class="py-3 px-8">{{ atividade.description }}</p>
               <!-- descricao -->
@@ -125,6 +127,10 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import moment from 'moment'
+import Navegacao from "@/components/Navegacao.vue";
+
+
 
 export default {
   name: "Atividades",
@@ -132,65 +138,75 @@ export default {
     return {
       exibir: false,
       tarefas: [],
-      dialog: "",
-      date: new Date().toISOString().substr(0, 10),
-      dateFormatted: this.formatDate(new Date().toISOString().substr(0, 10)),
+      dialog: "",  
+      date: new Date().toISOString().substr(0, 10),    
+      dateFormatted: this.formatDate(new Date().toISOString().substr(0, 10)),      
       atividade: "",
-      descricao: "",
       menu1: false,
       menu2: false,
       tarefa: {},
       requires: [(x) => (x && x.length > 0) || "Campo obrigatório."],
 
-      form:{
+      form: {
         //passar aqui o que está no formulario - referencia é o login
         title: "",
         description: "",
-        user: "dcfbef94-c256-4749-a88e-04957d28048e",
-        isActive: true
-
-      }
+        userId: this.$store.getters.StateUserInfo.id,
+        isActive: true,
+        date: ""  
+      
+      
+      },
     };
+  },
+
+  components:{
+    Navegacao
   },
   watch: {
     date(val) {
       console.log(val);
       this.dateFormatted = this.formatDate(this.date);
+      this.form.date = this.formatDateSend(this.date)
+      localStorage.setItem("date", this.form.date)
     },
+
   },
+
 
   computed: {
-    ...mapGetters({Atividades: "StateUserInfo" }),
+    ...mapGetters({ Atividades: "StateUserInfo" }),
   },
-
   methods: {
-   
     add() {
       this.exibir = !this.exibir;
     },
-
     formatDate(date) {
       if (!date) return null;
       const [year, month, day] = date.split("-");
-      return `${day}/${month}/${year}`;
+      return `${day}/${month}/${year}`;    
+    },
+    formatDateSend(date) {
+      if (!date) return null;
+      const [year, month, day] = date.split("-");
+      return `${year}${month}${day}`;      
+    },
+    datarender: function(date){
+      return moment(date, 'YYYYMMDD').format('DD/MM/YYYY')
     },
 
-     ...mapActions(["CreateActivitie"]),
+    ...mapActions(["CreateActivitie"]),
 
-    
     async addAtividade() {
-
-    //  if (this.$refs.form.validate()) {
-
-        try{
-          await this.CreateActivitie(this.form)
-        }catch(error){
-          throw "Não foi possivel adicionar atividade"
-        }
-          this.dialog = !this.dialog;
-        }
-//    },
-    
+      //  if (this.$refs.form.validate()) {
+      try {
+        await this.CreateActivitie(this.form);
+      } catch (error) {
+        throw "Não foi possivel adicionar atividade";
+      }
+      this.dialog = !this.dialog;
+    },
+    //    },
   },
 };
 </script>

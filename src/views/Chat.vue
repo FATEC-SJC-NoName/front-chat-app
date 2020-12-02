@@ -13,7 +13,7 @@
         <v-speed-dial
           v-model="fab"
           top
-          style="position: fixed; top: 80%; left: 5%;"
+          style="position: fixed; top: 80%; left: 5%"
         >
           <template v-slot:activator>
             <v-btn
@@ -35,92 +35,55 @@
       <!-- header do campo de duvidas -->
       <v-card min-width="500" max-width="800" class="justify-lg-center">
         <v-card-title
-          style="background-color:green"
+          style="background-color: green"
           class="justify-center rounded-t-md elevation-5"
         >
-          <h2 style="color:white">Dúvidas NoName</h2>
+          <h2 style="color: white">Chat Empresarial</h2>
         </v-card-title>
         <br />
 
         <v-card-text style="height: 800px" class="my-2">
-          <!-- campo de pesquisa -->
-          <v-text-field
-            outlined
-            height="60"
-            label="Pesquisar"
-            style="font-size:25px;"
-            prepend-inner-icon="mdi-file-find-outline"
-            class="mx-16 my-2"
-          ></v-text-field>
+   
 
           <!-- duvidas -->
-          <div class="text-center">
-            <h2 style="color:black">Duvidas Frequentes</h2>
+          <div class="text-left">
             <br />
-            <!-- lista das duvidas -->
-            <v-list
-              style="justify-content: center;text-align: left;display: grid;"
-            >
-              <v-list-item-group
-                v-model="selectedItem"
-                color="primary"
-                class="text-center mb-9"
-                ><v-divider></v-divider>
-                <v-list-item
-                  class="list-group-item list-group-item-action"
-                  href="#"
-                  >1 - Segunda via de boleto</v-list-item
-                ><v-divider></v-divider>
-                <v-list-item
-                  class="list-group-item list-group-item-action"
-                  href="#"
-                  >2 - Verificar hora e dia das minhas aulas</v-list-item
-                ><v-divider></v-divider>
-                <v-list-item
-                  class="list-group-item list-group-item-action"
-                  href="#"
-                  >3 - Agendar aula</v-list-item
-                ><v-divider></v-divider>
-                <v-list-item
-                  class="list-group-item list-group-item-action"
-                  href="#"
-                  >4 - Outro</v-list-item
-                ><v-divider></v-divider>
-              </v-list-item-group>
-            </v-list>
+            <h2 style="color: black">Contatos:</h2>
+          
+            <br />
 
-            <!-- botão para chamar o bot -->
-            <h3>Não encontrou uma solução?</h3>
-            <br />
             <v-btn
-              elevation="24"
-              large
+              v-for="contato in Contatos"
+              :key="contato.id"
+              id="connect"
+              color="blue darken-1"
+              style="color: white"
+              left
               rounded
-              color="green darken-1"
-              style="color:white"
-              @click="MostraChat()"
+              large
+              @click="connect('ca3f40f1-d1ae-4972-ad71-deef1714027e')"
+              ><v-icon x-large>mdi-account</v-icon>{{ contato.name }}</v-btn
             >
-              Clique aqui para falar com nosso bot</v-btn
-            >
+            
           </div>
         </v-card-text>
       </v-card>
 
-      <!-- ????? o Bot fica aqui -->
+      <!-- o Bot fica aqui -->
       <v-card
         min-width="700"
         max-width="900"
-        style="right:90%"
+        style="right: 90%"
         v-if="exibirChat"
       >
-        <v-card-title style="background-color:green" class="justify-center">
-          <h1 style="color:white">ChatBot NoName</h1>
+        <v-card-title style="background-color: green" class="justify-center">
+          <h1 style="color: white">ChatBot NoName</h1>
           <v-spacer></v-spacer>
           <v-btn
             elevation="24"
             fab
             small
-            style="color:white"
+            style="color: white"
             @click="MostraChat()"
             outlined
           >
@@ -129,10 +92,10 @@
         </v-card-title>
         <br />
 
-        <v-card-text style="height: 600px;" class="my-3">
+        <v-card-text style="height: 600px" class="my-3">
           <v-card-text class="text-center">
             <v-card
-              style="background-color:#F5F5F5; font-size:18px"
+              style="background-color: #f5f5f5; font-size: 18px"
               width="600"
             >
               <v-row>
@@ -147,17 +110,18 @@
                 </v-col>
               </v-row>
               <v-btn
+                id="connect"
                 color="green darken-1"
-                style="color:white"
+                style="color: white"
                 left
                 rounded
                 large
-                @click="atendente"
+                @click="connect"
                 >Sim</v-btn
               >
               <v-btn
                 color="red darken-1"
-                style="color:white"
+                style="color: white"
                 right
                 rounded
                 large
@@ -167,7 +131,7 @@
             </v-card>
             <br />
             <v-card
-              style="background-color:#F5F5F5; font-size:18px"
+              style="background-color: #f5f5f5; font-size: 18px"
               width="600"
               v-if="robot"
             >
@@ -189,22 +153,20 @@
             color="blue"
             background-color="white"
             append-icon="mdi-send"
-            @keyup.native.enter="EnviandoMensagem(texto.mensagem)"
-            @click:append="EnviandoMensagem(texto.mensagem)"
           ></v-text-field>
         </v-footer>
       </v-card>
 
       <!-- O Chat fica aqui -->
-      <v-card min-width="700" max-width="900" style="right:90%" v-if="exibir">
-        <v-card-title style="background-color:green" class="justify-center">
-          <h1 style="color:white">Chat NoName</h1>
+      <v-card min-width="700" max-width="900" style="right: 90%" v-if="exibir">
+        <v-card-title style="background-color: green" class="justify-center">
+          <h1 style="color: white">Chat NoName</h1>
           <v-spacer></v-spacer>
           <v-btn
             elevation="24"
             fab
             small
-            style="color:white"
+            style="color: white"
             @click="atendente"
             outlined
           >
@@ -213,38 +175,32 @@
         </v-card-title>
         <br />
 
-        <v-card-text style="height: 600px;" class="my-3">
+        <v-card-text style="height: 600px" class="my-3">
           <v-card-text class="text-center">
             <v-col cols="9">
               <v-card
-                style="background-color:#F5F5F5; font-size:18px"
+                style="background-color: #f5f5f5; font-size: 18px"
                 width="500"
               >
-                <v-row>
-                  <v-col class="text-left">
-                    <v-icon x-large>mdi-account</v-icon>
-                  </v-col>
-                  <v-col cols="10">
-                    <label>Olá, meu nome é Pedro. Em que posso ajudá-lo?</label>
-                  </v-col>
-                </v-row>
+              
               </v-card>
             </v-col>
             <br />
             <v-row>
-              <v-col cols="3"></v-col>
+              <v-col cols="3"> </v-col>
               <v-col cols="9">
                 <v-card
                   class="text-right"
                   color="green"
                   width="500"
-                  v-for="texto in textosEnviados"
-                  :key="texto"
+                  v-for="message in messages"
+                  :key="message"
                 >
                   <v-row class="mt-4">
                     <v-col cols="10">
-                      <v-card-text style="font-size:18px;color:white;"
-                        >{{ texto.mensagem }}
+                      {{message.senderName}}
+                      <v-card-text style="font-size: 18px; color: white"
+                        >{{ message.body }}
                       </v-card-text>
                     </v-col>
                     <v-col class="text-right">
@@ -260,14 +216,14 @@
         </v-card-text>
         <v-footer absolute>
           <v-text-field
-            v-model="texto.mensagem"
+            v-model="text"
             outlined
             rounded
             color="blue"
             background-color="white"
             append-icon="mdi-send"
-            @keyup.native.enter="EnviandoMensagem(texto.mensagem)"
-            @click:append="EnviandoMensagem(texto.mensagem)"
+            @keyup.native.enter="sendMessage"
+            @click:append="sendMessage"
           ></v-text-field>
         </v-footer>
       </v-card>
@@ -276,43 +232,86 @@
 </template>
 
 <script>
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
+import { mapGetters } from "vuex";
+
 export default {
+  name: "Chat",
+
   data() {
     return {
       exibirChat: false,
-      textosEnviados: [],
-      texto: { mensagem: "" },
+      text: null,
       exibir: false,
       robot: false,
       sheet: false,
       messages: [],
-    }
+    };
   },
+
   methods: {
     MostraChat() {
-    this.exibirChat = !this.exibirChat;
+      this.exibirChat = !this.exibirChat;
+    },
+
+    connect(chatId) {
+      this.exibir = !this.exibir;
+      this.exibirChat = false;
+
+      this.socket = new SockJS("http://3.90.183.159:8080/ws");
+      //this.socket = new SockJS("http://localhost:8080/ws");
+      this.stompClient = Stomp.over(this.socket);
+
+      this.stompClient.connect(
+        {},
+        (frame) => {
+          console.log(frame);
+          this.stompClient.subscribe(
+            "/chat/" + chatId + "/queue/messages",
+            (resposta) => {
+              this.messages.push(JSON.parse(resposta.body));
+
+              //console.log(this.messages.body.body)
+              //console.log("Essa e a resposta" + resposta.body);
+              //this.messages.push(JSON.parse(resposta).content)
+            }
+          );
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+
+    sendMessage() {
+      if (this.stompClient && this.stompClient.connected) {
+        const msg = {
+          userId: this.$store.getters.StateUserInfo.id,
+          chatId: "ca3f40f1-d1ae-4972-ad71-deef1714027e",
+          body: this.text,
+        };
+
+        this.stompClient.send("/app/chat", {}, JSON.stringify(msg));
+      }
+
+      this.text = ""
+    },
+
+    bot() {
+      this.robot = true;
+    },
+    scrollToEnd() {
+      const container = document.getElementById("scroll");
+      container.scrollTop = container.scrollHeight;
+    },
+    async fetchMessages() {
+      this.sheet = !this.sheet;
+    },
   },
-  EnviandoMensagem(texto) {
-    if (texto) {
-      this.textosEnviados.push({ mensagem: texto });
-      // this.scrollToEnd()
-      this.texto.mensagem = "";
-    }
-  },
-  atendente() {
-    this.exibir = !this.exibir;
-    this.exibirChat = false;
-  },
-  bot() {
-    this.robot = true;
-  },
-  scrollToEnd() {
-    const container = document.getElementById("scroll");
-    container.scrollTop = container.scrollHeight;
-  },
-  async fetchMessages() {
-    this.sheet = !this.sheet;
-  },
+
+  computed: {
+    ...mapGetters({ Contatos: "StateContatosInfo" }),
   },
 };
 </script>

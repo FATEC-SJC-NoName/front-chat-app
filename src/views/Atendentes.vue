@@ -1,5 +1,6 @@
 <template style="background-color:black">
   <v-container>
+      <Navegacao />
     <div class="atendente">
       <h2 class="ma-5 font-weight-bold ">Atendentes</h2>
       <v-container class="my-5">
@@ -23,11 +24,19 @@
         </v-layout>
       </v-container>
     </div>
+      <Chat />
   </v-container>
+  
 </template>
 
 <script>
+import Navegacao from "@/components/Navegacao.vue";
+import Chat from "./Chat";
 export default {
+    components: {
+    Navegacao,
+    Chat
+  },
   data: () => ({
     team: [
       { name: "Oliver Nicolas" },

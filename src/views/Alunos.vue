@@ -1,7 +1,8 @@
 <template style="background-color:black">
   <v-container>
+    <Navegacao />
     <div class="aluno">
-      <h2 class="ma-5 font-weight-bold ">Alunos</h2>
+      <h2 class="ma-5 font-weight-bold">Alunos</h2>
       <v-container class="my-5">
         <v-layout row wrap>
           <v-flex xs12 sm3 v-for="id in team" :key="id.name">
@@ -23,11 +24,19 @@
         </v-layout>
       </v-container>
     </div>
+    <Chat />
   </v-container>
+  
 </template>
 
 <script>
+import Navegacao from "@/components/Navegacao.vue";
+import Chat from "./Chat";
 export default {
+  components: {
+    Navegacao,
+    Chat,
+  },
   data: () => ({
     team: [
       { name: "Clara Julia" },

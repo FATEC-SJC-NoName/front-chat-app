@@ -1,7 +1,7 @@
 <template>
-  <nav >
+  <nav>
      
-    <v-navigation-drawer v-model="drawer" app color="teal lighten-3" v-if=['Login', 'Chat'].indexOf($route.name) > -1>
+    <v-navigation-drawer v-model="drawer" app color="teal lighten-3">
       <v-container class="justify-space-between ma-12" fluid>
         
         <h2 v-if="User">Bem vindo {{User.name}}</h2>

@@ -1,5 +1,9 @@
 <template>
   <v-container>
+       <Navegacao />
+       <br />
+       <br />
+       <br />
     <v-row class="fill-height">
       <v-col>
         <v-sheet height="64">
@@ -98,11 +102,18 @@
         </v-sheet>
       </v-col>
     </v-row>
+      <Chat />
   </v-container>
 </template>
 <script>
+import Navegacao from "@/components/Navegacao.vue";
+import Chat from "./Chat";
 export default {
   name: "Calendar",
+    components: {
+    Navegacao,
+    Chat
+  },
   data: () => ({
     focus: "",
     type: "month",

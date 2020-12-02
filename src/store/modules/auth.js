@@ -1,32 +1,33 @@
 import axios from 'axios';
 
+let idUsuario = ""
 
 const state = {
     //user: '',
     userInfo: {},
-    jwt: localStorage.getItem("jwt") || "",
+    contatosInfo: {},
+    jwt: localStorage.getItem("jwt") || ""
   
 }
 
 const getters = {
     isAuthenticated: state => !!state.jwt,
     StateJwt: state => state.jwt,
-    StateUserInfo: (state) => state.userInfo 
+    StateUserInfo: (state) => state.userInfo,
+    StateContatosInfo: (state) => state.contatosInfo
 }
 
 const actions = {
 
     async LogIn({commit}, body){
-   
+        axios.defaults.headers.common['Authorization'] = undefined   
         const response = await axios.post("authentication", body)           
         //console.log(response.data.jwt)
         //await axios.post("authentication", user);
         await commit("setJwt", response.data.jwt)      
         localStorage.setItem("jwt", response.data.jwt)
-        const jwtRes = response.data.jwt
-        axios.defaults.headers.common['Authorization'] = `Bearer ${jwtRes}`
-
-       
+        const jwtRes = response.data.jwt   
+        axios.defaults.headers.common['Authorization'] = `Bearer ${jwtRes}`       
     },
     
     async LogOut({commit}){
@@ -39,12 +40,22 @@ const actions = {
 
     async getUserInfo({commit}){
         let response = await axios.get('users/me')
+        idUsuario = response.data.id
         commit('setUserInfo', response.data)
     },
     
-    async CreateActivitie(activitie){
-        await axios.post('activities', activitie)
-        //return await dispatch("getUserInfo")       
+    async getContatos({commit}){
+       console.log(idUsuario)
+        let response = await axios.get('users/'+idUsuario+'/contacts')   
+        commit('setContatos', response.data)
+
+    },
+    
+    async CreateActivitie({dispatch}, body){
+        //console.log(body)
+        await axios.post('activities', body)
+        await dispatch("getUserInfo")
+       
   
     },
 /*
@@ -64,6 +75,9 @@ const mutations = {
     setUserInfo(state, userInfoMe){
         state.userInfo = userInfoMe
     },
+    setContatos(state,  contatos){
+        state.contatosInfo =  contatos
+    },
     /*
     setUser(state, username){
         state.user = username
@@ -71,6 +85,7 @@ const mutations = {
     logout(state){
         state.jwt = ""
         state.userInfo = ""
+        state.contatosInfo = ""
     }
 }
 

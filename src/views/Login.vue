@@ -1,6 +1,9 @@
 <template>
+
   <form @submit.prevent="submit()">
+    
     <div class="login-page">
+      
       <div class="card">
         <div class="card-header">Login</div>
         <div class="card-body">
@@ -14,6 +17,8 @@
             />
           </div>
           <div class="form-group">
+              
+        
             <input
               required
               type="password"
@@ -25,19 +30,28 @@
           <button class="btn btn-primary w-100">Entrar</button>
         </div>
       </div>
+     <Chatbot />
     </div>
   </form>
+
+
+ 
 </template>
+
+
 
 
 <script>
 
 import { mapActions } from "vuex";
+import Chatbot from "./Chatbot";
 
 export default {
   name: "Login",
 
-  components: {},
+  components: {
+    Chatbot
+  },
 
   data() {
     return {

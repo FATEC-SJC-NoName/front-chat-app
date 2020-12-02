@@ -1,11 +1,12 @@
 <template>
   <v-app style="background-color:#EEEEEE">
-    <navegacao />
 
-    <v-content>
-      <router-view />
-      <Chat />
-    </v-content>
+
+
+    <router-view>  </router-view>
+ 
+  
+ 
   </v-app>
 </template>
 
@@ -18,13 +19,8 @@
 
 <script>
 import Vue from "vue";
-import Chat from "@/views/Chat.vue";
-import Navegacao from "@/components/Navegacao.vue";
+
 export default Vue.extend({
-  name: "App",
-  components: {
-    Navegacao,
-    Chat    
-  },
+  name: "App"
 })
 </script>
